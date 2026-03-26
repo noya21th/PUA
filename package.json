@@ -1,0 +1,17 @@
+{
+  "name": "pua-tetris",
+  "private": true,
+  "version": "1.0.0",
+  "description": "PUA俄罗斯方块 — 用俄罗斯方块消灭职场/家庭PUA黑话",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^8.0.1",
+    "vite-plugin-singlefile": "^2.3.2"
+  }
+}
