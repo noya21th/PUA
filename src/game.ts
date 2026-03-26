@@ -1,4 +1,4 @@
-import { PHRASES_2, PHRASES_3, PHRASES_4, PUA_LEVELS } from './phrases';
+import { PHRASES_2, PHRASES_3, PHRASES_4, PHRASES_6, PHRASES_7, PUA_LEVELS } from './phrases';
 import { sfxMove, sfxRotate, sfxDrop, sfxLand, sfxClear, sfxGameOver, sfxLevelUp, initAudio, startBGM, stopBGM, setBGMCallbacks } from './audio';
 import { showPuaPraise, showPuaCrown } from './toast';
 
@@ -31,6 +31,24 @@ const PHRASES_5 = [
   '简单可依赖','消费者导向','苦练基本功','开除三类人',
   '风口上的猪','复盘四步法','端到端交付','构建和引领',
   '你给妈丢人','碗底还有油','身体牺牲型',
+];
+
+// 6格形状 — hexomino
+const SHAPES_6 = [
+  [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5]],     // I6 横线
+  [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]],      // 2×3 方块
+  [[0,0],[0,1],[0,2],[0,3],[1,0],[1,1]],      // P6
+  [[0,0],[0,1],[1,1],[1,2],[2,2],[2,3]],      // S6 阶梯
+  [[0,0],[0,1],[0,2],[1,2],[1,3],[1,4]],      // N6
+  [[0,0],[1,0],[1,1],[1,2],[1,3],[2,3]],      // Z6
+];
+// 7格形状 — heptomino
+const SHAPES_7 = [
+  [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6]],       // I7 横线
+  [[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2]],        // P7
+  [[0,0],[0,1],[0,2],[1,2],[1,3],[1,4],[1,5]],        // N7
+  [[0,0],[1,0],[1,1],[1,2],[1,3],[2,3],[2,4]],        // 阶梯7
+  [[0,0],[0,1],[0,2],[0,3],[1,3],[1,4],[1,5]],        // L7
 ];
 
 const COLORS = [
@@ -93,16 +111,24 @@ function initBoard() {
 }
 
 function randomPiece(): Piece {
-  // 难度曲线：低级主要出2/4字，高级出更多5字
+  // 难度曲线：低级简单短词，高级出长词（含家庭PUA）
   const roll = Math.random();
   let phrases: string[], shapes: number[][][];
 
-  if (level >= 30 && roll < 0.20) {
-    // 30级以上 20%概率出5字
+  if (level >= 70 && roll < 0.12) {
+    // 70级+ 12%概率出7字（家庭PUA长句）
+    phrases = PHRASES_7;
+    shapes = SHAPES_7;
+  } else if (level >= 50 && roll < 0.18) {
+    // 50级+ 18%概率出6字
+    phrases = PHRASES_6;
+    shapes = SHAPES_6;
+  } else if (level >= 20 && roll < 0.22) {
+    // 20级+ 出5字
     phrases = PHRASES_5;
     shapes = SHAPES_5;
-  } else if (level >= 60 && roll < 0.35) {
-    // 60级以上 35%概率出5字
+  } else if (level >= 40 && roll < 0.30) {
+    // 40级+ 更多5字
     phrases = PHRASES_5;
     shapes = SHAPES_5;
   } else if (roll < 0.12) {
