@@ -58,9 +58,8 @@ app.innerHTML = `
     <canvas id="game-canvas"></canvas>
     <div id="toast-container"></div>
     <div id="overlay">
-      <h1>PUA俄罗斯方块</h1>
-      <div class="subtitle">消灭每一句职场黑话</div>
-      <button id="start-btn">开始消灭PUA</button>
+      <h1>PUA了吗？</h1>
+      <button id="start-btn">开始美好的一天</button>
     </div>
   </div>
 
@@ -137,11 +136,11 @@ function showGameOverOverlay() {
   overlay.classList.remove('hidden');
   const lvlColor = game.level >= 99 ? '#FFD700' : '#ff6b9d';
   overlay.innerHTML = `
-    <h1>PUA堆满了！</h1>
-    <div class="subtitle">你在职场PUA中坚持了 ${game.lines} 行</div>
+    <h1>PUA了吗？</h1>
+    <div class="subtitle">你今天被PUA了 ${game.lines} 行</div>
     <div class="final-score">得分: ${game.score} | 消灭: ${game.clearedPhrases}个PUA</div>
     <div class="subtitle" style="color:${lvlColor}">PUA等级: ${game.getPuaLevel()}</div>
-    <button id="start-btn" style="margin-top:16px">再来一局</button>
+    <button id="start-btn" style="margin-top:16px">再来美好的一天</button>
   `;
   document.getElementById('start-btn')!.onclick = doStart;
 }
