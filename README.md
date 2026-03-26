@@ -5,7 +5,7 @@
 
 ## 在线玩 | Play Online
 
-👉 **https://akaneservice.github.io/PUA/**
+👉 **https://noya21th.github.io/PUA/**
 
 ## 游戏截图 | Screenshot
 
@@ -87,7 +87,7 @@ A Tetris game themed around Chinese workplace & family PUA (manipulative) buzzwo
 ## 本地开发 | Development
 
 ```bash
-git clone https://github.com/akaneservice/PUA.git
+git clone https://github.com/noya21th/PUA.git
 cd PUA
 npm install
 npm run dev     # 开发服务器
