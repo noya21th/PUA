@@ -1,7 +1,7 @@
 # PUA 俄罗斯方块 | PUA Tetris
 
-> 用俄罗斯方块消灭职场/家庭 PUA 黑话！
-> Destroy workplace & family PUA buzzwords with Tetris!
+> 用俄罗斯方块消灭职场 PUA 黑话！
+> Destroy workplace PUA buzzwords with Tetris!
 
 ## 在线玩 | Play Online
 
@@ -17,7 +17,7 @@
 
 ### 中文
 
-这是一款以职场/家庭 PUA 黑话为主题的俄罗斯方块游戏。
+这是一款以职场 PUA 黑话为主题的俄罗斯方块游戏。
 
 - 每个掉落的方块都由一个 PUA 黑话词汇组成（如"底层逻辑"、"灵魂拷问"、"毕业警告"等）
 - 每个汉字占一格，词汇会组成不同的俄罗斯方块形状
@@ -39,7 +39,7 @@
 
 ### English
 
-A Tetris game themed around Chinese workplace & family PUA (manipulative) buzzwords.
+A Tetris game themed around Chinese workplace PUA (manipulative) buzzwords.
 
 - Each falling piece is made of a PUA buzzword (e.g. "底层逻辑" = underlying logic, "灵魂拷问" = soul interrogation)
 - Each Chinese character occupies one cell, forming various Tetris shapes
@@ -70,12 +70,12 @@ A Tetris game themed around Chinese workplace & family PUA (manipulative) buzzwo
 
 ## PUA词汇来源 | PUA Vocabulary Sources
 
-收录了 **99个** 中文互联网经典 PUA 黑话，涵盖：
+收录了 **90+个** 中文互联网经典职场 PUA 黑话，涵盖：
 
 - 🏢 互联网大厂黑话（底层逻辑、顶层设计、闭环、赛道、颗粒度…）
 - 🐺 狼性文化用语（末位淘汰、毕业警告、优化名单…）
-- 👨‍👩‍👧 家庭PUA话术（灵魂拷问、情感核弹、十月怀胎…）
-- 📊 职场通用术语（对齐目标、拉通资源、信息拉齐…）
+- 📊 职场管理术语（对齐目标、拉通资源、信息拉齐…）
+- 🔥 绩效考核话术（灵魂拷问、绩效审视、温和失望…）
 
 ## 技术栈 | Tech Stack
 

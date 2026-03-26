@@ -59,7 +59,7 @@ app.innerHTML = `
     <div id="toast-container"></div>
     <div id="overlay">
       <h1>PUA俄罗斯方块</h1>
-      <div class="subtitle">消灭每一句职场/家庭黑话</div>
+      <div class="subtitle">消灭每一句职场黑话</div>
       <button id="start-btn">开始消灭PUA</button>
     </div>
   </div>
