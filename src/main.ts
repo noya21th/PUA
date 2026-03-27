@@ -231,15 +231,63 @@ bindMobileBtn('btn-rotate', () => game.rotatePiece());
 bindMobileBtn('btn-down', () => game.moveDown());
 bindMobileBtn('btn-drop', () => game.hardDrop());
 
-// ===== 移动端canvas缩放 =====
-function setMobileScale() {
-  if (window.innerWidth <= 768) {
-    const scale = Math.min(1, (window.innerWidth * 0.96) / 384);
-    document.documentElement.style.setProperty('--mobile-scale', String(scale));
+// ===== 移动端 canvas 自适应 =====
+function fitMobileCanvas() {
+  if (window.innerWidth > 768) {
+    canvas.style.width = '';
+    canvas.style.height = '';
+    return;
   }
+  const header = document.getElementById('mobile-header')!;
+  const controls = document.getElementById('mobile-controls')!;
+  const headerH = header.offsetHeight;
+  const controlsH = controls.offsetHeight;
+  const availH = window.innerHeight - headerH - controlsH - 4;
+  const availW = window.innerWidth * 0.96;
+  const ratio = 384 / 704;
+  let w: number, h: number;
+  if (availW / availH > ratio) {
+    h = availH;
+    w = availH * ratio;
+  } else {
+    w = availW;
+    h = availW / ratio;
+  }
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
 }
-setMobileScale();
-window.addEventListener('resize', setMobileScale);
+fitMobileCanvas();
+window.addEventListener('resize', fitMobileCanvas);
+window.addEventListener('orientationchange', () => setTimeout(fitMobileCanvas, 100));
+
+// ===== 移动端操作提示 =====
+function showMobileTutorial() {
+  if (window.innerWidth > 768) return;
+  const el = document.createElement('div');
+  el.id = 'mobile-tutorial';
+  el.className = 'show';
+  el.innerHTML = `
+    <div class="tutorial-title">操作指南</div>
+    <div class="tutorial-grid">
+      <div class="tutorial-icon">◀ ▶</div>
+      <div class="tutorial-desc">左右按钮移动<small>或在画面上左右滑动</small></div>
+      <div class="tutorial-icon">↻</div>
+      <div class="tutorial-desc">旋转方块<small>或点击画面</small></div>
+      <div class="tutorial-icon">▼</div>
+      <div class="tutorial-desc">加速下落</div>
+      <div class="tutorial-icon accent">⏏</div>
+      <div class="tutorial-desc">直接落底<small>或在画面上下滑</small></div>
+    </div>
+    <div class="tutorial-dismiss">点击任意位置开始</div>
+  `;
+  document.body.appendChild(el);
+  el.addEventListener('click', () => {
+    el.style.opacity = '0';
+    el.style.transition = 'opacity 0.3s';
+    setTimeout(() => el.remove(), 300);
+  });
+}
+showMobileTutorial();
 
 // ===== 初始渲染 =====
 startBtn.onclick = doStart;

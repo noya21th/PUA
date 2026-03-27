@@ -222,14 +222,96 @@ body {
   display: none;
 }
 
+/* ===== Mobile Tutorial Overlay ===== */
+#mobile-tutorial {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 26, 0.96);
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  animation: tutorialFadeIn 0.4s ease-out;
+}
+#mobile-tutorial.show { display: flex; }
+
+@keyframes tutorialFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.tutorial-title {
+  font-size: 24px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff6b9d, #c44dff, #4dc9f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.tutorial-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px 16px;
+  align-items: center;
+  max-width: 280px;
+}
+
+.tutorial-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.tutorial-icon.accent {
+  border-color: rgba(196, 77, 255, 0.5);
+  background: rgba(196, 77, 255, 0.12);
+}
+
+.tutorial-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+}
+.tutorial-desc small {
+  display: block;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 2px;
+}
+
+.tutorial-dismiss {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 12px;
+  animation: tutorialPulse 2s ease-in-out infinite;
+}
+
+@keyframes tutorialPulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.7; }
+}
+
 /* ===== Mobile Responsive ===== */
 @media (max-width: 768px) {
 
   body {
     align-items: flex-start;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding-top: 0;
+    height: 100vh;
+    height: 100dvh;
   }
 
   #game-wrapper {
@@ -237,7 +319,9 @@ body {
     align-items: center;
     gap: 0;
     width: 100%;
-    padding-bottom: 16px;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   /* Hide side panels on mobile */
@@ -253,17 +337,19 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    padding: 8px 12px 6px;
+    padding: 6px 12px 4px;
+    padding-top: max(6px, env(safe-area-inset-top));
     background: rgba(255, 255, 255, 0.04);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     order: -1;
+    flex-shrink: 0;
   }
 
   .mobile-stat {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 1px;
   }
 
   .mobile-stat-label {
@@ -274,38 +360,35 @@ body {
   }
 
   .mobile-stat-value {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #fff;
     line-height: 1;
   }
 
   .mobile-stat-value.pua {
-    font-size: 12px;
+    font-size: 11px;
     color: #ff6b9d;
     font-weight: normal;
   }
 
-  /* Board container: center and scale canvas to fit screen */
+  /* Board container: flex-grow to fill available space */
   #board-container {
+    flex: 1;
     width: 100%;
     display: flex;
     justify-content: center;
-    overflow: visible;
-  }
-
-  #board-container > * {
-    transform-origin: top center;
+    align-items: center;
+    overflow: hidden;
+    min-height: 0;
   }
 
   #game-canvas {
-    /* Scale down the 384px-wide canvas to fit the viewport.
-       CSS custom property --mobile-scale is set via JS if needed;
-       fallback uses calc so the canvas fills ~96vw. */
-    transform: scale(var(--mobile-scale, calc(96vw / 384px)));
-    transform-origin: top center;
-    /* Reserve vertical space equal to scaled height (704px canvas) */
-    margin-bottom: calc((var(--mobile-scale, calc(96vw / 384px)) - 1) * 704px);
+    display: block;
+    max-width: 96vw;
+    max-height: 100%;
+    width: auto;
+    height: auto;
   }
 
   /* Mobile virtual controls */
@@ -313,10 +396,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    padding: 12px 16px 8px;
-    margin-top: 8px;
+    padding: 8px 16px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    flex-shrink: 0;
   }
 
   .mobile-controls-row {
@@ -328,13 +412,13 @@ body {
   }
 
   .mobile-btn {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     border: 2px solid rgba(255, 255, 255, 0.2);
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
-    font-size: 22px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -353,9 +437,9 @@ body {
 
   /* Drop button is slightly larger and accent-colored */
   .mobile-btn.drop {
-    width: 64px;
-    height: 64px;
-    font-size: 26px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
     border-color: rgba(196, 77, 255, 0.5);
     background: rgba(196, 77, 255, 0.12);
   }
@@ -364,15 +448,8 @@ body {
     background: rgba(196, 77, 255, 0.35);
   }
 
-  /* Credit: keep visible above the bottom edge on mobile */
+  /* Hide credit on mobile to save space */
   #credit {
-    position: relative;
-    bottom: auto;
-    right: auto;
-    display: block;
-    text-align: center;
-    padding: 6px 0 4px;
-    width: 100%;
-    font-size: 10px;
+    display: none;
   }
 }
